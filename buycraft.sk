@@ -1,0 +1,115 @@
+
+# ██████╗░██╗░░░██╗██╗░░░██╗░█████╗░██████╗░░█████╗░███████╗████████╗  ██╗░░░░░░█████╗░██╗░░░██╗███████╗████████╗
+# ██╔══██╗██║░░░██║╚██╗░██╔╝██╔══██╗██╔══██╗██╔══██╗██╔════╝╚══██╔══╝  ██║░░░░░██╔══██╗██║░░░██║██╔════╝╚══██╔══╝
+# ██████╦╝██║░░░██║░╚████╔╝░██║░░╚═╝██████╔╝███████║█████╗░░░░░██║░░░  ██║░░░░░███████║╚██╗░██╔╝█████╗░░░░░██║░░░
+# ██╔══██╗██║░░░██║░░╚██╔╝░░██║░░██╗██╔══██╗██╔══██║██╔══╝░░░░░██║░░░  ██║░░░░░██╔══██║░╚████╔╝░██╔══╝░░░░░██║░░░
+# ██████╦╝╚██████╔╝░░░██║░░░╚█████╔╝██║░░██║██║░░██║██║░░░░░░░░██║░░░  ███████╗██║░░██║░░╚██╔╝░░███████╗░░░██║░░░
+# ╚═════╝░░╚═════╝░░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░░░░╚═╝░░░  ╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝░░░╚═╝░░░
+
+# ░█████╗░███████╗  ██╗░░░██╗░█████╗░██████╗░░█████╗░███████╗███████╗███╗░░██╗
+# ██╔══██╗██╔════╝  ╚██╗░██╔╝██╔══██╗██╔══██╗██╔══██╗╚════██║██╔════╝████╗░██║
+# ███████║█████╗░░  ░╚████╔╝░██║░░██║██║░░██║███████║░░███╔═╝█████╗░░██╔██╗██║
+# ██╔══██║██╔══╝░░  ░░╚██╔╝░░██║░░██║██║░░██║██╔══██║██╔══╝░░██╔══╝░░██║╚████║
+# ██║░░██║██║░░░░░  ░░░██║░░░╚█████╔╝██████╔╝██║░░██║███████╗███████╗██║░╚███║
+# ╚═╝░░╚═╝╚═╝░░░░░  ░░░╚═╝░░░░╚════╝░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝
+
+
+command /buycraft [<string>] [<offline player>] [<integer>]:
+    aliases: /butik, /buy, /store
+    cooldown: 1 second
+    cooldown message: &8&l[&3&l!&8&l] &fVent lidt før du prøver igen!
+    trigger:
+        if arg-1 is not set:
+            buycraft(player)
+        else if arg-1 = "request":
+            set {_num} to "%arg-2%" parsed as number
+            if {_num} is set:
+                message "&8&l[&a&l!&8&l] &b%player%&f vil gerne købe &b%{_num}% shards&f!" to all players where [input has permission "OP"]
+                message "&8&l[&a&l!&8&l] &fDu har oprettet en anmodning om &b%{_num}% shards&f!" to player
+            else:
+                message "&8&l[&a&l!&8&l] &fForkert brug: /buycraft request <antal>!"
+        if player has permission "buycraft.manage":
+            if arg-1 = "info":
+                if arg-2 is not set:
+                    message " &8[ &b&lBUYCRAFT &8]"
+                    message ""
+                    message "&f/buycraft info%nl%   &f - &7Viser denne besked!"
+                    message "&f/buycraft info <player>%nl%   &f - &7Viser spillerens information!"
+                    message "&f/buycraft give <player> <amount>%nl%   &f - &7Giver shards til spilleren! &nBliver logged som i købshistorik!"
+                    message "&f/buycraft take <player> <amount>%nl%   &f - &7Fjerner shards fra spilleren! &nFjerner ikke fra købshistorik!"
+                    message "&f/buycraft clear <player>%nl%   &f - &7Resætter spillerens shards og købshistorik!"
+                    message ""
+                else if arg-2 is a player:
+                    message " &8[ &b&lBUYCRAFT &8]"
+                    message "&fSpiller: %arg-2%"
+                    message "&fShards: %{Shards::%uuid of arg-2%} ? 0%"
+                    message "Købshistorik:"
+                    message join (reversed ({Purchases::%arg-2's uuid%::*} ? "&cIngen tidligere køb")) with nl
+            if arg-2 is a player:
+                if arg-1 = "give":
+                    if arg-3 is set:
+                        add arg-3 to {Shards::%arg-2's uuid%}
+                        broadcast "&8&l[&a&l!&8&l] &b%arg-2%&f har købt &b%arg-3% shards&f via buycraft!"
+                else if arg-1 = "take":
+                    if arg-3 is set:
+                        if {Shards::%arg-2's uuid%} >= arg-3:
+                            remove arg-3 from {Shards::%arg-2's uuid%}
+                            message "&8&l[&a&l!&8&l] &fDu har fjernet &b%arg-3% shards&f fra &b%arg-2%&f!" to player
+                        else:
+                            if {Shards::%arg-2's uuid%} > 0:
+                                set {Shards::%arg-2's uuid%} to 0
+                                message "&8&l[&a&l!&8&l] &fDu har sat &b%arg-2%'s shards&f til 0!" to player
+                            else:
+                                message "&8&l[&c&l!&8&l] &b%arg-2%&f har allerede kun 0 shards!" to player
+                else if arg-1 = "clear":
+                    delete {Shards::%arg-2's uuid%}
+                    delete {Purchases::%arg-2's uuid%::*}
+                    message "&8&l[&a&l!&8&l] &fDu har cleared &b%arg-2%" to player
+
+inventory click:
+    if name of player's current inventory contains "&3&lBuycraft -":
+        cancel event
+        name of event-slot = "&c&lGå tilbage!":
+            buycraft(player,"main")
+        if event-slot is a player head:
+            set {_type} to getType(name of event-inventory)
+            loop yml node keys "Buycraft.%{_type}%" from "Config":
+                if index of event-slot = (yml value "%loop-node%.Slot" from "Config"):
+                    set {_name} to last element of split "%loop-node%" at "."
+                    set {_price} to (yml value "%loop-node%.Price" from "Config")
+            loop {Purchases::%player's uuid%::*}:
+                if loop-value contains "[%{_type}%] %{_name}%":
+                    message "&8&l[&c&l!&8&l] &fDu kan &nikke&f købe dette produkt 2. gange."
+                    stop
+            if ((yml value "Buycraft.%{_type}%.%{_name}%.Priority" from "Config") ? 1) > ({Buycraft::%{_type}%::%player's uuid%} ? 0):
+                if {Shards::%player's uuid%} >= {_price}:
+                    subtract {_price} from {Shards::%player's uuid%}
+                    broadcast "&8&l[&a&l!&8&l] &b%player%&f har lige købt for &b%{_name}%&f for &b%{_price}% shards&f!"
+                    if (yml value "Buycraft.%{_type}%.%{_name}%.Priority" from "Config") is set:
+                        set {Buycraft::%{_type}%::%player's uuid%} to (yml value "Buycraft.%{_type}%.%{_name}%.Priority" from "Config")
+                    add "&f- [%{_type}%] %{_name}% &8(&f%now formatted as "dd-MM-yyyy, HH:mm"%&8)" to {Purchases::%player's uuid%::*}
+                    close player's inventory
+                else:
+                    message "&8&l[&c&l!&8&l] &fDu har ikke nok shards til at købe dette! Du har &b&n%{Shards::%player's uuid%} ? 0% shards&f!" to player
+            else:
+                message "&8&l[&c&l!&8&l] &fDu kan ikke dette da du allerede ejer et bedre produkt&f!" to player
+    if name of player's current inventory contains "&3&lBuycraft":
+        cancel event
+        if event-slot is a player head:
+            play sound "ORB_PICKUP" with volume 0.15 to player
+    if name of player's current inventory = "&f&l        ❃ &3&lBuycraft &f&l❃":
+        loop yml node keys "Buycraft" from "Config":
+            if index of event-slot = (yml value "%loop-node%.Slot" from "Config"):
+                set {_split::*} to split "%loop-node%" at "."
+                set {_size} to (size of {_split::*})
+                buycraft(player,"%{_split::%{_size}%}%")
+    else if name of player's current inventory = "&f&l        ❁ &3&lBuycraft &f&l❁":
+        if index of event-slot = 15:
+            if click action = left mouse:
+                buycraft(player,"main")
+            else if click action = right mouse:
+                buycraft(player,"TOS")
+    else if name of player's current inventory = "&f    &l❁ &3&lTerms of Service &f&l❁":
+        cancel event
+        if index of event-slot = 31:
+            buycraft(player,"start")
