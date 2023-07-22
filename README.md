@@ -52,9 +52,11 @@ Buycraft:
             Settings:
                 Priority: 1
                 BuyAmounts: 1
+                ExecuteCommand:
+                - '[CONSOLE]/lp user {PLAYER_NAME} parent add Rank1'
             Item: player head
             Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc0ZjkxMGNhN2VkNzNkOGM1ZmRjODQ3NmQxYmVkN2FlNGUxOGY4ZTFkZjZiODAwZDE2YjNiZTNkMzNlYmJmYyJ9fX0=
-            Price: 5000
+            Price: 2500
             Slot: 12
             Title: "&b&lRANK &f&l1"
             Lore:
@@ -70,9 +72,12 @@ Buycraft:
             Settings:
                 Priority: 2
                 BuyAmounts: 1
+                ExecuteCommand:
+                - '[CONSOLE]/lp user {PLAYER_NAME} parent add Rank2'
+                - '[CONSOLE]/lp user {PLAYER_NAME} permission set Kit1 true'
             Item: player head
             Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM1NWMyZmNlNjIyNjM4YTQ2ZWM3ZTk2YTA5N2FjZWIzYjEyM2MwOTU4Y2MxMzExMjY4YWFkYzU2NTkyNDQzOSJ9fX0=
-            Price: 5000
+            Price: 2500
             Slot: 13
             Title: "&b&lRANK &f&l2"
             Lore:
@@ -88,9 +93,12 @@ Buycraft:
             Settings:
                 Priority: 3
                 BuyAmounts: 1
+                ExecuteCommand:
+                - '[CONSOLE]/lp user {PLAYER_NAME} parent add Rank3'
+                - '[CONSOLE]/lp user {PLAYER_NAME} permission set Kit2 true'
             Item: player head
             Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGUyMWQyY2E5MjI3ZmRjMjIwYjMyYTk5OTA4NDNhMzRjN2U5NzVlZWM1OTVkMGYxMzdlMjUwYzE0Y2Q5NzI0NiJ9fX0=
-            Price: 5000
+            Price: 2500
             Slot: 14
             Title: "&b&lRANK &f&l3"
             Lore:
