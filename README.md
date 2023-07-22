@@ -8,6 +8,8 @@ For at kunne benytte dette skal du have følgende plugins:
 
 **Skript-Yaml 1.4.1**
 
+**SkBee 1.10.2**
+
 `Bemærk: Skriptet er kun blevet testet til version 1.8.8`
 
 # Kommandoer:
