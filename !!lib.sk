@@ -27,21 +27,24 @@ function load_YAML():
         set yml value "Buycraft.Ranks.Slot" from "Config" to 12
         set yml value "Buycraft.Ranks.Title" from "Config" to "&b&lRANKS&f&l:"
         set yml list "Buycraft.Ranks.Lore" from "Config" to " " and "&7Klik for at åbne!"
-        set yml value "Buycraft.Ranks.Rank1.Priority" from "Config" to 1
+        set yml value "Buycraft.Ranks.Rank1.Settings.Priority" from "Config" to 1
+        set yml value "Buycraft.Ranks.Rank1.Settings.BuyAmounts" from "Config" to 1
         set yml value "Buycraft.Ranks.Rank1.Item" from "Config" to "player head"
         set yml value "Buycraft.Ranks.Rank1.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc0ZjkxMGNhN2VkNzNkOGM1ZmRjODQ3NmQxYmVkN2FlNGUxOGY4ZTFkZjZiODAwZDE2YjNiZTNkMzNlYmJmYyJ9fX0="
         set yml value "Buycraft.Ranks.Rank1.Price" from "Config" to 5000
         set yml value "Buycraft.Ranks.Rank1.Slot" from "Config" to 12
         set yml value "Buycraft.Ranks.Rank1.Title" from "Config" to "&b&lRANK &f&l1"
         set yml list "Buycraft.Ranks.Rank1.Lore" from "Config" to "&8|&m------------------&8|", "&b&lRANK1 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
-        set yml value "Buycraft.Ranks.Rank2.Priority" from "Config" to 2
+        set yml value "Buycraft.Ranks.Rank2.Settings.Priority" from "Config" to 2
+        set yml value "Buycraft.Ranks.Rank2.Settings.BuyAmounts" from "Config" to 1
         set yml value "Buycraft.Ranks.Rank2.Item" from "Config" to "player head"
         set yml value "Buycraft.Ranks.Rank2.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM1NWMyZmNlNjIyNjM4YTQ2ZWM3ZTk2YTA5N2FjZWIzYjEyM2MwOTU4Y2MxMzExMjY4YWFkYzU2NTkyNDQzOSJ9fX0="
         set yml value "Buycraft.Ranks.Rank2.Price" from "Config" to 5000
         set yml value "Buycraft.Ranks.Rank2.Slot" from "Config" to 13
         set yml value "Buycraft.Ranks.Rank2.Title" from "Config" to "&b&lRANK &f&l2"
         set yml list "Buycraft.Ranks.Rank2.Lore" from "Config" to "&8|&m------------------&8|", "&b&lRANK2 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
-        set yml value "Buycraft.Ranks.Rank3.Priority" from "Config" to 3
+        set yml value "Buycraft.Ranks.Rank3.Settings.Priority" from "Config" to 3
+        set yml value "Buycraft.Ranks.Rank3.Settings.BuyAmounts" from "Config" to 1
         set yml value "Buycraft.Ranks.Rank3.Item" from "Config" to "player head"
         set yml value "Buycraft.Ranks.Rank3.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGUyMWQyY2E5MjI3ZmRjMjIwYjMyYTk5OTA4NDNhMzRjN2U5NzVlZWM1OTVkMGYxMzdlMjUwYzE0Y2Q5NzI0NiJ9fX0="
         set yml value "Buycraft.Ranks.Rank3.Price" from "Config" to 5000
@@ -55,18 +58,24 @@ function load_YAML():
         set yml value "Buycraft.Kits.Slot" from "Config" to 14
         set yml value "Buycraft.Kits.Title" from "Config" to "&b&lKits&f&l:"
         set yml list "Buycraft.Kits.Lore" from "Config" to " " and "&7Klik for at åbne!"
+        set yml value "Buycraft.Kits.Kits1.Settings.Priority" from "Config" to 1
+        set yml value "Buycraft.Kits.Kits1.Settings.BuyAmounts" from "Config" to 1
         set yml value "Buycraft.Kits.Kits1.Item" from "Config" to "player head"
         set yml value "Buycraft.Kits.Kits1.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc0ZjkxMGNhN2VkNzNkOGM1ZmRjODQ3NmQxYmVkN2FlNGUxOGY4ZTFkZjZiODAwZDE2YjNiZTNkMzNlYmJmYyJ9fX0="
         set yml value "Buycraft.Kits.Kits1.Price" from "Config" to 5000
         set yml value "Buycraft.Kits.Kits1.Slot" from "Config" to 12
         set yml value "Buycraft.Kits.Kits1.Title" from "Config" to "&b&lKits1"
         set yml list "Buycraft.Kits.Kits1.Lore" from "Config" to "&8|&m------------------&8|", "&b&lKits1 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
+        set yml value "Buycraft.Kits.Kits2.Settings.Priority" from "Config" to 2
+        set yml value "Buycraft.Kits.Kits2.Settings.BuyAmounts" from "Config" to 1
         set yml value "Buycraft.Kits.Kits2.Item" from "Config" to "player head"
         set yml value "Buycraft.Kits.Kits2.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM1NWMyZmNlNjIyNjM4YTQ2ZWM3ZTk2YTA5N2FjZWIzYjEyM2MwOTU4Y2MxMzExMjY4YWFkYzU2NTkyNDQzOSJ9fX0="
         set yml value "Buycraft.Kits.Kits2.Price" from "Config" to 5000
         set yml value "Buycraft.Kits.Kits2.Slot" from "Config" to 13
         set yml value "Buycraft.Kits.Kits2.Title" from "Config" to "&b&lKits2"
         set yml list "Buycraft.Kits.Kits2.Lore" from "Config" to "&8|&m------------------&8|", "&b&lKits2 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
+        set yml value "Buycraft.Kits.Kits3.Settings.Priority" from "Config" to 3
+        set yml value "Buycraft.Kits.Kits3.Settings.BuyAmounts" from "Config" to 1
         set yml value "Buycraft.Kits.Kits3.Item" from "Config" to "player head"
         set yml value "Buycraft.Kits.Kits3.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGUyMWQyY2E5MjI3ZmRjMjIwYjMyYTk5OTA4NDNhMzRjN2U5NzVlZWM1OTVkMGYxMzdlMjUwYzE0Y2Q5NzI0NiJ9fX0="
         set yml value "Buycraft.Kits.Kits3.Price" from "Config" to 5000
