@@ -5,6 +5,7 @@ Dette er et specielt desginet Buycraft, lavet med henblik på at gøre det bruge
 For at kunne benytte dette skal du have følgende plugins:
 
 **Skript 2.6.4 (Anvend venligst en fork til 1.8)**
+**Skript-Yaml 1.4.1**
 
 `Bemærk: Skriptet er kun blevet testet til version 1.8.8`
 
