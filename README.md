@@ -8,6 +8,17 @@ For at kunne benytte dette skal du have følgende plugins:
 
 `Bemærk: Skriptet er kun blevet testet til version 1.8.8`
 
+# Kommandoer:
+
+Skriptet inkluderer selvfølgelig standardkommandoen /buycraft med alias /buy, men derudover tilbyder vi også en særlig administrator buycraft-kommando!
+
+Ved at have tilladelsen `buycraft.manage` kan du bruge kommandoen /buy info, som giver dig adgang til en bred vifte af kommandoer!
+
+Med denne kommando kan du for eksempel tildele Shards (valuta) ved hjælp af /buy give <spiller> <antal>, få adgang til købshistorik og meget mere...
+
+Vi stræber efter at levere en omfattende kommandopakke, der giver dig fuld kontrol over dine købsprocesser og forbedrer din administrative oplevelse på serveren. Kh ChatGPT <3
+
+
 # Konfiguration
 Skriptet er yderst konfigurerbart, hvilket giver dig fuld frihed til at tilpasse Buycraft-systemet efter dine egne ønsker og behov.
 
