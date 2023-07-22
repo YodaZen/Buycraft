@@ -42,28 +42,27 @@ command /buycraft [<string>] [<offline player>] [<integer>]:
                 else if arg-2 is a player:
                     message " &8[ &b&lBUYCRAFT &8]"
                     message "&fSpiller: %arg-2%"
-                    message "&fShards: %{Shards::%uuid of arg-2%} ? 0%"
+                    message "&fShards: %{Buycraft::%uuid of arg-2%::Shards} ? 0%"
                     message "Købshistorik:"
-                    message join (reversed ({Purchases::%arg-2's uuid%::*} ? "&cIngen tidligere køb")) with nl
+                    message join (reversed ({Buycraft::%arg-2's uuid%::Purchases::*} ? "&cIngen tidligere køb")) with nl
             if arg-2 is a player:
                 if arg-1 = "give":
                     if arg-3 is set:
-                        add arg-3 to {Shards::%arg-2's uuid%}
+                        add arg-3 to {Buycraft::%arg-2's uuid%::Shards}
                         broadcast "&8&l[&a&l!&8&l] &b%arg-2%&f har købt &b%arg-3% shards&f via buycraft!"
                 else if arg-1 = "take":
                     if arg-3 is set:
-                        if {Shards::%arg-2's uuid%} >= arg-3:
-                            remove arg-3 from {Shards::%arg-2's uuid%}
+                        if {Buycraft::%arg-2's uuid%::Shards} >= arg-3:
+                            remove arg-3 from {Buycraft::%arg-2's uuid%::Shards}
                             message "&8&l[&a&l!&8&l] &fDu har fjernet &b%arg-3% shards&f fra &b%arg-2%&f!" to player
                         else:
-                            if {Shards::%arg-2's uuid%} > 0:
-                                set {Shards::%arg-2's uuid%} to 0
+                            if {Buycraft::%arg-2's uuid%::Shards} > 0:
+                                set {Buycraft::%arg-2's uuid%::Shards} to 0
                                 message "&8&l[&a&l!&8&l] &fDu har sat &b%arg-2%'s shards&f til 0!" to player
                             else:
                                 message "&8&l[&c&l!&8&l] &b%arg-2%&f har allerede kun 0 shards!" to player
                 else if arg-1 = "clear":
-                    delete {Shards::%arg-2's uuid%}
-                    delete {Purchases::%arg-2's uuid%::*}
+                    delete {Buycraft::%arg-2's uuid%::*}
                     message "&8&l[&a&l!&8&l] &fDu har cleared &b%arg-2%" to player
 
 inventory click:
@@ -77,20 +76,22 @@ inventory click:
                 if index of event-slot = (yml value "%loop-node%.Slot" from "Config"):
                     set {_name} to last element of split "%loop-node%" at "."
                     set {_price} to (yml value "%loop-node%.Price" from "Config")
-            loop {Purchases::%player's uuid%::*}:
-                if loop-value contains "[%{_type}%] %{_name}%":
-                    message "&8&l[&c&l!&8&l] &fDu kan &nikke&f købe dette produkt 2. gange."
+            set {_buyable} to (yml value "Buycraft.%{_type}%.%{_name}%.Settings.BuyAmounts" from "Config")
+            if {_buyable} is set:
+                set {_amount} to (size of ({Buycraft::%player's uuid%::Purchases::*} where [input contains "[%{_type}%] %{_name}%"]))
+                if {_amount} >= {_buyable}:
+                    message "&8&l[&c&l!&8&l] &fDu kan ikke købe flere af dette produkt!" to player
                     stop
-            if ((yml value "Buycraft.%{_type}%.%{_name}%.Priority" from "Config") ? 1) > ({Buycraft::%{_type}%::%player's uuid%} ? 0):
-                if {Shards::%player's uuid%} >= {_price}:
-                    subtract {_price} from {Shards::%player's uuid%}
+            if ((yml value "Buycraft.%{_type}%.%{_name}%.Settings.Priority" from "Config") ? 1) > ({Buycraft::%player's uuid%::%{_type}%} ? 0):
+                if {Buycraft::%player's uuid%::Shards} >= {_price}:
+                    subtract {_price} from {Buycraft::%player's uuid%::Shards}
                     broadcast "&8&l[&a&l!&8&l] &b%player%&f har lige købt for &b%{_name}%&f for &b%{_price}% shards&f!"
-                    if (yml value "Buycraft.%{_type}%.%{_name}%.Priority" from "Config") is set:
-                        set {Buycraft::%{_type}%::%player's uuid%} to (yml value "Buycraft.%{_type}%.%{_name}%.Priority" from "Config")
-                    add "&f- [%{_type}%] %{_name}% &8(&f%now formatted as "dd-MM-yyyy, HH:mm"%&8)" to {Purchases::%player's uuid%::*}
+                    if (yml value "Buycraft.%{_type}%.%{_name}%.Settings.Priority" from "Config") is set:
+                        set {Buycraft::%player's uuid%::%{_type}%} to (yml value "Buycraft.%{_type}%.%{_name}%.Settings.Priority" from "Config")
+                    add "&f- [%{_type}%] %{_name}% &8(&f%now formatted as "dd-MM-yyyy, HH:mm"%&8)" to {Buycraft::%player's uuid%::Purchases::*}
                     close player's inventory
                 else:
-                    message "&8&l[&c&l!&8&l] &fDu har ikke nok shards til at købe dette! Du har &b&n%{Shards::%player's uuid%} ? 0% shards&f!" to player
+                    message "&8&l[&c&l!&8&l] &fDu har ikke nok shards til at købe dette! Du har &b&n%{Buycraft::%player's uuid%::Shards} ? 0% shards&f!" to player
             else:
                 message "&8&l[&c&l!&8&l] &fDu kan ikke dette da du allerede ejer et bedre produkt&f!" to player
     if name of player's current inventory contains "&3&lBuycraft":
