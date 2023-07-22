@@ -88,6 +88,12 @@ inventory click:
                     broadcast "&8&l[&a&l!&8&l] &b%player%&f har lige købt for &b%{_name}%&f for &b%{_price}% shards&f!"
                     if (yml value "Buycraft.%{_type}%.%{_name}%.Settings.Priority" from "Config") is set:
                         set {Buycraft::%player's uuid%::%{_type}%} to (yml value "Buycraft.%{_type}%.%{_name}%.Settings.Priority" from "Config")
+                    set {_command::*} to (yml list "Buycraft.%{_type}%.%{_name}%.Settings.ExecuteCommand" from "Config")
+                    loop {_command::*}:
+                        if loop-value contains "[PLAYER]":
+                            player command "%placeholder_replace(loop-value,player)%"
+                        else if loop-value contains "[CONSOLE]":
+                            console command "%placeholder_replace(loop-value,player)%"
                     add "&f- [%{_type}%] %{_name}% &8(&f%now formatted as "dd-MM-yyyy, HH:mm"%&8)" to {Buycraft::%player's uuid%::Purchases::*}
                     close player's inventory
                 else:
