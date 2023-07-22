@@ -24,7 +24,7 @@ function buycraft(player: player,type: string = "start"):
         set {_g} to chest inventory with 3 rows named "&f&l        ❁ &3&lBuycraft &f&l❁"
         set slot {_glass::*} of {_g} to {_glasstype} named "&f"
         set slot 15 of {_g} to getHead("{@mainHead}") named "&b&lBuycraft&f&l:" with lore "%nl%&fVenstreklik:%nl%&f- &7&oTilgå vores &b&nBuycraft" and "%nl%&fHøjreklik:%nl%&f- &7&oLæs vores &b&nTerms of Service"
-        set {_lore::*} to "&7Du har lige nu &b&n%{Shards::%{_player}'s uuid%} ? 0% shards&f!", "", "&fKøbshistorik:" and join (reversed ({Purchases::%{_player}'s uuid%::*} ? "&cIngen tidligere køb")) with nl
+        set {_lore::*} to "&7Du har lige nu &b&n%{Buycraft::%{_player}'s uuid%::Shards} ? 0% shards&f!", "", "&fKøbshistorik:" and join (reversed ({Buycraft::%{_player}'s uuid%::Purchases::*} ? "&cIngen tidligere køb")) with nl
         set slot 13 of {_g} to skull of {_player} named "&b&l%{_player}%&f&l:" with lore join {_lore::*} with nl
         set slot 11 of {_g} to prismarine shard named "&b&lShard Shop&f&l:" with lore "&7For at få &nSHARDS&7 kan du%nl%&7oprette en anmodning via:%nl%&f - &b/Buy request <antal>"
     else if {_type} = "main":
