@@ -29,6 +29,7 @@ Vi har udviklet Skriptet med tanke på, at du kan tilføje så mange kategorier,
 For eksempel er Ranks: en kategori, hvor Rank1: repræsenterer et produkt.
 
 Derudover kan du tildele forskellige produkter en prioritet (priority), hvilket betyder, at hvis en spiller køber et produkt med f.eks. Priority 2, vil de ikke kunne købe et andet produkt fra samme kategori med en lavere prioritet.
+(Dette behøves dog ikke)
 
 Konfigurationsfilen, config.yml, kan findes ved følgende sti: _plugins/Skript/YAML/Buycraft/config.yml_
 
