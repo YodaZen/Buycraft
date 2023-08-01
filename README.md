@@ -37,6 +37,17 @@ Konfigurationsfilen, config.yml, kan findes ved følgende sti: _plugins/Skript/Y
 
 Vi håber, at vores Buycraft tilbyder dig en enestående mulighed for at udvide og tilpasse dit serverens købeprocess på bedst mulig vis.
 ```
+# Mulige Betalingsmetoder:
+# UNIKPAY | Her vil der blive sendt en betalingsanmodning via Unikpay til køberen.
+# DIRECT TRANSFER | Her vil der blive sendt en besked i chatten, som informere staffs om en spiller gerne vil købe!
+Payment:
+    Method: DIRECT TRANSFER
+
+# Mulige Placeholders:
+# {PLAYER_NAME} : Navnet på Spilleren
+# {PLAYER_COINS} | Antal af spillerens coins!
+# {PLAYER_PURCHASES} | Spillerens køb i buycraft!
+
 Menues:
     Forside:
         Title: Buycraft
