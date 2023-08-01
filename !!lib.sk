@@ -14,111 +14,184 @@
 # ╚═╝░░╚═╝╚═╝░░░░░  ░░░╚═╝░░░░╚════╝░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝
 
 on load:
-    load_YAML()
+    load yml "plugins/Skript/YAML/Buycraft/Config.yml" as "plugins/Skript/YAML/Buycraft/Config.yml"
+    if yml value "Payment" from "plugins/Skript/YAML/Buycraft/Config.yml" is not set:
+        set yml value "Payment.Method" from "plugins/Skript/YAML/Buycraft/Config.yml" to "DIRECT TRANSFER"
+        set {_comments::*} to "Mulige Betalingsmetoder:", "UNIKPAY | Her vil der blive sendt en betalingsanmodning via Unikpay til køberen.", "DIRECT TRANSFER | Her vil der blive sendt en besked i chatten, som informere staffs om en spiller gerne vil købe!"
+        set comments of yaml node "Payment" from "plugins/Skript/YAML/Buycraft/Config.yml" to {_comments::*}
+    if yml value "Menues" from "plugins/Skript/YAML/Buycraft/Config.yml" is not set:
+        set yml value "Menues.Forside.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "Buycraft"
+        set yml value "Menues.Forside.Rows" from "plugins/Skript/YAML/Buycraft/Config.yml" to 5
+        set yml value "Menues.Forside.Items.1.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.Forside.Items.1.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "light blue glass pane"
+        set yml list "Menues.Forside.Items.1.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 0, 1, 2, 3, 4, 5, 6, 7 and 8
+        set yml list "Menues.Forside.Items.1.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[CLOSE]"
+        set yml value "Menues.Forside.Items.2.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.Forside.Items.2.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "white glass pane"
+        set yml list "Menues.Forside.Items.2.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[CLOSE]"
+        set yml list "Menues.Forside.Items.2.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 36, 37, 38, 39, 40, 41, 42, 43 and 44
+        set yml value "Menues.Forside.Items.3.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "player head"
+        set yml value "Menues.Forside.Items.3.Value" from "plugins/Skript/YAML/Buycraft/Config.yml" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2UyZWI0NzUxZTNjNTBkNTBmZjE2MzUyNTc2NjYzZDhmZWRmZTNlMDRiMmYwYjhhMmFhODAzYjQxOTM2M2NhMSJ9fX0="
+        set yml list "Menues.Forside.Items.3.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 24
+        set yml value "Menues.Forside.Items.3.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lTerms of Service&f&l:"
+        set yml list "Menues.Forside.Items.3.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&f- &7Klik for at åbne!"
+        set yml list "Menues.Forside.Items.3.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[OPEN] TOS"
+        set yml value "Menues.Forside.Items.4.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "player head"
+        set yml value "Menues.Forside.Items.4.Value" from "plugins/Skript/YAML/Buycraft/Config.yml" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ=="
+        set yml list "Menues.Forside.Items.4.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 22
+        set yml value "Menues.Forside.Items.4.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lBuycraft&f&l:"
+        set yml list "Menues.Forside.Items.4.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&f- &7Klik for at åbne!"
+        set yml list "Menues.Forside.Items.4.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[OPEN] CATEGORY"
+        set yml value "Menues.Forside.Items.5.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "player head"
+        set yml value "Menues.Forside.Items.5.Value" from "plugins/Skript/YAML/Buycraft/Config.yml" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ=="
+        set yml list "Menues.Forside.Items.5.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 20
+        set yml value "Menues.Forside.Items.5.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lInformation&f&l:"
+        set yml list "Menues.Forside.Items.5.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&f- &7Du har &b&n{PLAYER_COINS}&7 coins!", " ", "&7Brug denne kommando for at købe flere!:", "&b/buy request <antal>", " ", "&7Købshistorik:", "{PLAYER_PURCHASES}"
 
-function load_YAML():
-    load yml "plugins/Skript/YAML/Buycraft/Config.yml" as "Config"
-    if yml value "GUI_Glass.Item" from "Config" is not set:
-        set yml value "GUI_Glass.Item" from "Config" to "light blue glass pane"
-        set yml list "GUI_Glass.Slots" from "Config" to 0, 8, 9, 17, 18, 26, 27 and 35
-    if yml value "Buycraft.Ranks" from "Config" is not set:
-        set yml value "Buycraft.Ranks.Item" from "Config" to "player head"
-        set yml value "Buycraft.Ranks.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDMwZjcxMDE1NzZmMDQxNmJjZjQ4Yjc2Y2MwMGY2NzI0MmE5OTU2MGI4Yjg5M2MyMGIyMGRjODVjYTYzYjUyNyJ9fX0="
-        set yml value "Buycraft.Ranks.Slot" from "Config" to 12
-        set yml value "Buycraft.Ranks.Title" from "Config" to "&b&lRANKS&f&l:"
-        set yml list "Buycraft.Ranks.Lore" from "Config" to " " and "&7Klik for at åbne!"
-        set yml value "Buycraft.Ranks.Rank1.Settings.Priority" from "Config" to 1
-        set yml value "Buycraft.Ranks.Rank1.Settings.BuyAmounts" from "Config" to 1
-        set yml list "Buycraft.Ranks.Rank1.Settings.ExecuteCommand" from "Config" to "[CONSOLE]/lp user {PLAYER_NAME} parent add Rank1"
-        set yml value "Buycraft.Ranks.Rank1.Item" from "Config" to "player head"
-        set yml value "Buycraft.Ranks.Rank1.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc0ZjkxMGNhN2VkNzNkOGM1ZmRjODQ3NmQxYmVkN2FlNGUxOGY4ZTFkZjZiODAwZDE2YjNiZTNkMzNlYmJmYyJ9fX0="
-        set yml value "Buycraft.Ranks.Rank1.Price" from "Config" to 5000
-        set yml value "Buycraft.Ranks.Rank1.Slot" from "Config" to 12
-        set yml value "Buycraft.Ranks.Rank1.Title" from "Config" to "&b&lRANK &f&l1"
-        set yml list "Buycraft.Ranks.Rank1.Lore" from "Config" to "&8|&m------------------&8|", "&b&lRANK1 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
-        set yml value "Buycraft.Ranks.Rank2.Settings.Priority" from "Config" to 2
-        set yml value "Buycraft.Ranks.Rank2.Settings.BuyAmounts" from "Config" to 1
-        set yml list "Buycraft.Ranks.Rank2.Settings.ExecuteCommand" from "Config" to "[CONSOLE]/lp user {PLAYER_NAME} parent add Rank2"
-        set yml value "Buycraft.Ranks.Rank2.Item" from "Config" to "player head"
-        set yml value "Buycraft.Ranks.Rank2.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM1NWMyZmNlNjIyNjM4YTQ2ZWM3ZTk2YTA5N2FjZWIzYjEyM2MwOTU4Y2MxMzExMjY4YWFkYzU2NTkyNDQzOSJ9fX0="
-        set yml value "Buycraft.Ranks.Rank2.Price" from "Config" to 5000
-        set yml value "Buycraft.Ranks.Rank2.Slot" from "Config" to 13
-        set yml value "Buycraft.Ranks.Rank2.Title" from "Config" to "&b&lRANK &f&l2"
-        set yml list "Buycraft.Ranks.Rank2.Lore" from "Config" to "&8|&m------------------&8|", "&b&lRANK2 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
-        set yml value "Buycraft.Ranks.Rank3.Settings.Priority" from "Config" to 3
-        set yml value "Buycraft.Ranks.Rank3.Settings.BuyAmounts" from "Config" to 1
-        set yml list "Buycraft.Ranks.Rank3.Settings.ExecuteCommand" from "Config" to "[CONSOLE]/lp user {PLAYER_NAME} parent add Rank3"
-        set yml value "Buycraft.Ranks.Rank3.Item" from "Config" to "player head"
-        set yml value "Buycraft.Ranks.Rank3.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGUyMWQyY2E5MjI3ZmRjMjIwYjMyYTk5OTA4NDNhMzRjN2U5NzVlZWM1OTVkMGYxMzdlMjUwYzE0Y2Q5NzI0NiJ9fX0="
-        set yml value "Buycraft.Ranks.Rank3.Price" from "Config" to 5000
-        set yml value "Buycraft.Ranks.Rank3.Slot" from "Config" to 14
-        set yml value "Buycraft.Ranks.Rank3.Title" from "Config" to "&b&lRANK &f&l3"
-        set yml list "Buycraft.Ranks.Rank3.Lore" from "Config" to "&8|&m------------------&8|", "&b&lRANK3 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
-# Kits
-    if yml value "Buycraft.Kits" from "Config" is not set:
-        set yml value "Buycraft.Kits.Item" from "Config" to "player head"
-        set yml value "Buycraft.Kits.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDMwZjcxMDE1NzZmMDQxNmJjZjQ4Yjc2Y2MwMGY2NzI0MmE5OTU2MGI4Yjg5M2MyMGIyMGRjODVjYTYzYjUyNyJ9fX0="
-        set yml value "Buycraft.Kits.Slot" from "Config" to 14
-        set yml value "Buycraft.Kits.Title" from "Config" to "&b&lKits&f&l:"
-        set yml list "Buycraft.Kits.Lore" from "Config" to " " and "&7Klik for at åbne!"
-        set yml value "Buycraft.Kits.Kits1.Settings.Priority" from "Config" to 1
-        set yml value "Buycraft.Kits.Kits1.Settings.BuyAmounts" from "Config" to 1
-        set yml list "Buycraft.Kits.Kits1.Settings.ExecuteCommand" from "Config" to "[CONSOLE]/lp user {PLAYER_NAME} permission set Kit1 true"
-        set yml value "Buycraft.Kits.Kits1.Item" from "Config" to "player head"
-        set yml value "Buycraft.Kits.Kits1.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc0ZjkxMGNhN2VkNzNkOGM1ZmRjODQ3NmQxYmVkN2FlNGUxOGY4ZTFkZjZiODAwZDE2YjNiZTNkMzNlYmJmYyJ9fX0="
-        set yml value "Buycraft.Kits.Kits1.Price" from "Config" to 5000
-        set yml value "Buycraft.Kits.Kits1.Slot" from "Config" to 12
-        set yml value "Buycraft.Kits.Kits1.Title" from "Config" to "&b&lKits1"
-        set yml list "Buycraft.Kits.Kits1.Lore" from "Config" to "&8|&m------------------&8|", "&b&lKits1 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
-        set yml value "Buycraft.Kits.Kits2.Settings.Priority" from "Config" to 2
-        set yml value "Buycraft.Kits.Kits2.Settings.BuyAmounts" from "Config" to 1
-        set yml list "Buycraft.Kits.Kits2.Settings.ExecuteCommand" from "Config" to "[CONSOLE]/lp user {PLAYER_NAME} permission set Kit2 true"
-        set yml value "Buycraft.Kits.Kits2.Item" from "Config" to "player head"
-        set yml value "Buycraft.Kits.Kits2.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM1NWMyZmNlNjIyNjM4YTQ2ZWM3ZTk2YTA5N2FjZWIzYjEyM2MwOTU4Y2MxMzExMjY4YWFkYzU2NTkyNDQzOSJ9fX0="
-        set yml value "Buycraft.Kits.Kits2.Price" from "Config" to 5000
-        set yml value "Buycraft.Kits.Kits2.Slot" from "Config" to 13
-        set yml value "Buycraft.Kits.Kits2.Title" from "Config" to "&b&lKits2"
-        set yml list "Buycraft.Kits.Kits2.Lore" from "Config" to "&8|&m------------------&8|", "&b&lKits2 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
-        set yml value "Buycraft.Kits.Kits3.Settings.Priority" from "Config" to 3
-        set yml value "Buycraft.Kits.Kits3.Settings.BuyAmounts" from "Config" to 1
-        set yml list "Buycraft.Kits.Kits3.Settings.ExecuteCommand" from "Config" to "[CONSOLE]/lp user {PLAYER_NAME} permission set Kit3 true"
-        set yml value "Buycraft.Kits.Kits3.Item" from "Config" to "player head"
-        set yml value "Buycraft.Kits.Kits3.Value" from "Config" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGUyMWQyY2E5MjI3ZmRjMjIwYjMyYTk5OTA4NDNhMzRjN2U5NzVlZWM1OTVkMGYxMzdlMjUwYzE0Y2Q5NzI0NiJ9fX0="
-        set yml value "Buycraft.Kits.Kits3.Price" from "Config" to 5000
-        set yml value "Buycraft.Kits.Kits3.Slot" from "Config" to 14
-        set yml value "Buycraft.Kits.Kits3.Title" from "Config" to "&b&lKits3"
-        set yml list "Buycraft.Kits.Kits3.Lore" from "Config" to "&8|&m------------------&8|", "&b&lKits3 &f{PLAYER_NAME}", "&fIndhold:%nL%&f - &7/Kit Ice (12h cooldown)", "&f - &7/eat (5m cooldown)", " ", "&fPris: &b&n2.500 shards", " " and "&8|&m------------------&8|"
-    if yml value "Teams_OF_Service" from "Config" is not set:
-        set yml value "Teams_OF_Service.1.Slot" from "Config" to 9
-        set yml list "Teams_OF_Service.1.Lore" from "Config" to " &f- &7Du kan &nikke&7 få REFUND"
-        set yml value "Teams_OF_Service.2.Slot" from "Config" to 10
-        set yml list "Teams_OF_Service.2.Lore" from "Config" to " &f- &7Vi forbeholder os retten til ", "  &7at ændre disse servicevilkår " and "   &7efter vores eget skøn."
-        set yml value "Teams_OF_Service.3.Slot" from "Config" to 11
-        set yml list "Teams_OF_Service.3.Lore" from "Config" to " &f- &7Vi forbeholder os retten til ", "   &7at fjerne dine goder ved " and "   &7overtrædelse af vores reglement."
-        set {_comments::*} to "Mulige Placeholders:", "{PLAYER_NAME} : Navnet på Spilleren"
-        set comments of node "Buycraft" from "Config" to {_comments::*}
-    save yml "Config"
+# TOS eksempel menu:
+        set yml value "Menues.TOS.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "Buycraft - Terms of Service"
+        set yml value "Menues.TOS.Rows" from "plugins/Skript/YAML/Buycraft/Config.yml" to 4
+        set yml value "Menues.TOS.Items.1.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.TOS.Items.1.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "light blue glass pane"
+        set yml list "Menues.TOS.Items.1.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 0, 1, 2, 3, 4, 5, 6, 7 and 8
+        set yml value "Menues.TOS.Items.2.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.TOS.Items.2.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "white glass pane"
+        set yml list "Menues.TOS.Items.2.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 27, 28, 29, 30, 31, 32, 33, 34 and 35
+        set yml value "Menues.TOS.Items.3.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "sign item"
+        set yml list "Menues.TOS.Items.3.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 4
+        set yml value "Menues.TOS.Items.3.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lTerms of Service"
+        set yml value "Menues.TOS.Items.4.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "redstone"
+        set yml list "Menues.TOS.Items.4.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 31
+        set yml value "Menues.TOS.Items.4.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&cGå tilbage!"
+        set yml list "Menues.TOS.Items.4.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[OPEN] Forside"
+        set yml value "Menues.TOS.Items.5.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "paper"
+        set yml list "Menues.TOS.Items.5.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 9
+        set yml value "Menues.TOS.Items.5.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lBetingelse: &f&l##1"
+        set yml list "Menues.TOS.Items.5.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to " &f- &7Vi forbeholder os retten til ", "   &7at ændre disse servicevilkår " and "   &7efter vores eget skøn."
+        set yml value "Menues.TOS.Items.6.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "paper"
+        set yml list "Menues.TOS.Items.6.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 10
+        set yml value "Menues.TOS.Items.6.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lBetingelse: &f&l##2"
+        set yml list "Menues.TOS.Items.6.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to " &f- &7Vi forbeholder os retten til ", "   &7at fjerne dine goder ved " and "   &7overtrædelse af vores reglement."
+
+        set yml value "Menues.CATEGORY.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "Buycraft - Kategorier"
+        set yml value "Menues.CATEGORY.Rows" from "plugins/Skript/YAML/Buycraft/Config.yml" to 5
+        set yml value "Menues.CATEGORY.Items.1.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.CATEGORY.Items.1.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "light blue glass pane"
+        set yml list "Menues.CATEGORY.Items.1.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 0, 1, 2, 3, 4, 5, 6, 7 and 8
+        set yml value "Menues.CATEGORY.Items.2.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.CATEGORY.Items.2.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "white glass pane"
+        set yml list "Menues.CATEGORY.Items.2.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 36, 37, 38, 39, 40, 41, 42, 43 and 44
+        set yml value "Menues.CATEGORY.Items.3.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lKits&f&l:"
+        set yml list "Menues.CATEGORY.Items.3.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&7Indeholder:", "&f- KitNavn1"
+        set yml value "Menues.CATEGORY.Items.3.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "player head"
+        set yml value "Menues.CATEGORY.Items.3.Value" from "plugins/Skript/YAML/Buycraft/Config.yml" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ=="
+        set yml list "Menues.CATEGORY.Items.3.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 21
+        set yml list "Menues.CATEGORY.Items.3.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[OPEN] Kits"
+        set yml value "Menues.CATEGORY.Items.4.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lRanks&f&l:"
+        set yml list "Menues.CATEGORY.Items.4.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&7Indeholder:", "&f- RankNavn1"
+        set yml value "Menues.CATEGORY.Items.4.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "player head"
+        set yml value "Menues.CATEGORY.Items.4.Value" from "plugins/Skript/YAML/Buycraft/Config.yml" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ=="
+        set yml list "Menues.CATEGORY.Items.4.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 23
+        set yml list "Menues.CATEGORY.Items.4.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[OPEN] Ranks"
+        set yml value "Menues.CATEGORY.Items.5.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "redstone"
+        set yml list "Menues.CATEGORY.Items.5.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 40
+        set yml value "Menues.CATEGORY.Items.5.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&cGå tilbage!"
+        set yml list "Menues.CATEGORY.Items.5.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[OPEN] Forside"
+
+        set yml value "Menues.Ranks.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "Buycraft - Ranks"
+        set yml value "Menues.Ranks.Rows" from "plugins/Skript/YAML/Buycraft/Config.yml" to 5
+        set yml value "Menues.Ranks.Items.1.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.Ranks.Items.1.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "light blue glass pane"
+        set yml list "Menues.Ranks.Items.1.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 0, 1, 2, 3, 4, 5, 6, 7 and 8
+        set yml value "Menues.Ranks.Items.2.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.Ranks.Items.2.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "white glass pane"
+        set yml list "Menues.Ranks.Items.2.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 36, 37, 38, 39, 40, 41, 42, 43 and 44
+        set yml value "Menues.Ranks.Items.3.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lRankNavn1"
+        set yml value "Menues.Ranks.Items.3.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "player head"
+        set yml value "Menues.Ranks.Items.3.Value" from "plugins/Skript/YAML/Buycraft/Config.yml" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ=="
+        set yml list "Menues.Ranks.Items.3.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 22
+        set yml list "Menues.Ranks.Items.3.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to " ", "&7Indeholder:", "&7- /kit RankNavn1"
+        set yml value "Menues.Ranks.Items.3.Settings.Price" from "plugins/Skript/YAML/Buycraft/Config.yml" to 30000
+        set yml value "Menues.Ranks.Items.3.Settings.Priority" from "plugins/Skript/YAML/Buycraft/Config.yml" to 3
+        set yml value "Menues.Ranks.Items.3.Settings.BuyAmounts" from "plugins/Skript/YAML/Buycraft/Config.yml" to 1
+        set yml list "Menues.Ranks.Items.3.Settings.ExecuteCommand" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[CONSOLE]/lp user {PLAYER_NAME} parent add Rank3"
+        set yml list "Menues.Ranks.Items.3.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[PAYMENT] RankNavn1"
+        set yml value "Menues.Ranks.Items.4.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "redstone"
+        set yml list "Menues.Ranks.Items.4.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 40
+        set yml value "Menues.Ranks.Items.4.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&cGå tilbage!"
+        set yml list "Menues.Ranks.Items.4.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[OPEN] Forside"
+
+        set yml value "Menues.Kits.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "Buycraft - Kits"
+        set yml value "Menues.Kits.Rows" from "plugins/Skript/YAML/Buycraft/Config.yml" to 5
+        set yml value "Menues.Kits.Items.1.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.Kits.Items.1.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "light blue glass pane"
+        set yml list "Menues.Kits.Items.1.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 0, 1, 2, 3, 4, 5, 6, 7 and 8
+        set yml value "Menues.Kits.Items.2.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to " "
+        set yml value "Menues.Kits.Items.2.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "white glass pane"
+        set yml list "Menues.Kits.Items.2.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 36, 37, 38, 39, 40, 41, 42, 43 and 44
+        set yml value "Menues.Kits.Items.3.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&b&lKitNavn1"
+        set yml value "Menues.Kits.Items.3.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "player head"
+        set yml value "Menues.Kits.Items.3.Value" from "plugins/Skript/YAML/Buycraft/Config.yml" to "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ=="
+        set yml list "Menues.Kits.Items.3.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 22
+        set yml list "Menues.Kits.Items.3.Lore" from "plugins/Skript/YAML/Buycraft/Config.yml" to " ", "&7Indeholder:", "&7- /kit KitNavn1"
+        set yml value "Menues.Kits.Items.3.Settings.Price" from "plugins/Skript/YAML/Buycraft/Config.yml" to 15000
+        set yml value "Menues.Kits.Items.3.Settings.Priority" from "plugins/Skript/YAML/Buycraft/Config.yml" to 3
+        set yml value "Menues.Kits.Items.3.Settings.BuyAmounts" from "plugins/Skript/YAML/Buycraft/Config.yml" to 1
+        set yml list "Menues.Kits.Items.3.Settings.ExecuteCommand" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[CONSOLE]/lp user {PLAYER_NAME} parent add Rank3"
+        set yml list "Menues.Kits.Items.3.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[PAYMENT] KitNavn1"
+        set yml value "Menues.Kits.Items.4.Item" from "plugins/Skript/YAML/Buycraft/Config.yml" to "redstone"
+        set yml list "Menues.Kits.Items.4.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml" to 40
+        set yml value "Menues.Kits.Items.4.Title" from "plugins/Skript/YAML/Buycraft/Config.yml" to "&cGå tilbage!"
+        set yml list "Menues.Kits.Items.4.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml" to "[PLAYSOUND] ORB_PICKUP" and "[OPEN] Forside"
+
+        set {_comments::*} to "Mulige Placeholders:", "{PLAYER_NAME} : Navnet på Spilleren", "{PLAYER_COINS} | Antal af spillerens coins!" and "{PLAYER_PURCHASES} | Spillerens køb i buycraft!"
+        set comments of yaml node "Products" from "plugins/Skript/YAML/Buycraft/Config.yml" to {_comments::*}
+        set comments of yaml node "Menues" from "plugins/Skript/YAML/Buycraft/Config.yml" to {_comments::*}
+    save yml "plugins/Skript/YAML/Buycraft/Config.yml"
 
 
+    load yml "plugins/Skript/YAML/Buycraft/Messages.yml" as "plugins/Skript/YAML/Buycraft/Messages.yml"
+    if yml value "Messages" from "plugins/Skript/YAML/Buycraft/Messages.yml" is not set:
+        set yml value "Messages.prefix.success" from "plugins/Skript/YAML/Buycraft/Messages.yml" to "&8&l[&a&l!&8&l]&f"
+        set yml value "Messages.prefix.error" from "plugins/Skript/YAML/Buycraft/Messages.yml" to "&8&l[&c&l!&8&l]&f"
+        set yml value "Messages.prefix.warning" from "plugins/Skript/YAML/Buycraft/Messages.yml" to "&8&l[&3&l!&8&l]&f"
+        set yml value "Messages.currency.singular" from "plugins/Skript/YAML/Buycraft/Messages.yml" to "coin"
+        set yml value "Messages.currency.plural" from "plugins/Skript/YAML/Buycraft/Messages.yml" to "coins"
+        set {_i::1} to " &8[ &b&lBUYCRAFT &8]"
+        set {_i::2} to ""
+        set {_i::3} to "&f/buycraft info%nl%   &f - &7Viser denne besked!"
+        set {_i::4} to "&f/buycraft info <player>%nl%   &f - &7Viser spillerens information!"
+        set {_i::5} to "&f/buycraft give <player> <amount>%nl%   &f - &7Giver Coins til spilleren! &nBliver logged som i købshistorik!"
+        set {_i::6} to "&f/buycraft take <player> <amount>%nl%   &f - &7Fjerner Coins fra spilleren! &nFjerner ikke fra købshistorik!"
+        set {_i::7} to "&f/buycraft clear <player>%nl%   &f - &7Resætter spillerens Coins og købshistorik!"
+        set {_i::8} to ""
+        set yml list "Messages.Buycraft_Info.CommandMessage" from "plugins/Skript/YAML/Buycraft/Messages.yml" to {_i::*}
+        set {_i::1} to " &8[ &b&lBUYCRAFT &8]"
+        set {_i::2} to "&fSpiller: {PLAYER_NAME}"
+        set {_i::3} to "&fCoins: {PLAYER_COINS}"
+        set {_i::4} to "Købshistorik:"
+        set {_i::5} to "{PLAYER_PURCHASES}"
+        set yml list "Messages.Buycraft_Info.PlayerStats" from "plugins/Skript/YAML/Buycraft/Messages.yml" to {_i::*}
+        set {_comments::*} to "Mulige Placeholders:", "{PLAYER_NAME} : Navnet på Spilleren", "{PLAYER_COINS} | Antal af spillerens coins!" and "{PLAYER_PURCHASES} | Spillerens køb i buycraft!"
+        set comments of yaml node "Messages" from "plugins/Skript/YAML/Buycraft/Config.yml" to {_comments::*}
+    save yml "plugins/Skript/YAML/Buycraft/Messages.yml"
+    if (yml value "Payment" from "plugins/Skript/YAML/Buycraft/Config.yml") = "UNIKPAY":
+        enable script file "buycraft/unikpay.sk"
+        unload script file "buycraft/direct.sk"
+    else:
+        unload script file "buycraft/Payment/unikpay.sk"
+        enable script file "buycraft/Payment/direct.sk"
+    set {buycraft::prefix::success} to (yml value "Messages.prefix.success" from "plugins/Skript/YAML/Buycraft/Messages.yml")
+    set {buycraft::prefix::error} to (yml value "Messages.prefix.error" from "plugins/Skript/YAML/Buycraft/Messages.yml")
+    set {buycraft::prefix::warning} to (yml value "Messages.prefix.warning" from "plugins/Skript/YAML/Buycraft/Messages.yml")
 
 function placeholder_replace(strings: strings, player: player) :: strings:
     replace all "{PLAYER_NAME}" in {_strings::*} with "%{_player}%"
+    replace all "{PLAYER_COINS}" in {_strings::*} with "%({Buycraft::%{_player}'s uuid%::Coins} ? 0)%"
+    replace all "{PLAYER_PURCHASES}" in {_strings::*} with (join (reversed {Buycraft::%{_player}'s uuid%::Purchases::*}) with newline) ? "&cIngen købshistorik"
     replace all "[PLAYER]" in {_strings::*} with ""
     replace all "[CONSOLE]" in {_strings::*} with ""
     return {_strings::*}
-
-function getPrice(lore: strings) :: integer:
-    loop {_lore::*}:
-        if loop-value contains "Pris":
-            set {_index} to loop-index
-    set {_price} to uncolored 2nd element of split {_lore::%{_index}%} at " "
-    replace all "." with "" in {_price}
-    return {_price} parsed as integer
-
-function getType(name: string) :: string:
-    set {_split::*} to (split {_name} at " ")
-    set {_index} to ((size of {_split::*}) - 1)
-    return {_split::%{_index}%}
 
 function getHead(value: string) :: item type:
     return player head with nbt "{display:{Name:""&c""},SkullOwner:{Id:""%random uuid%"",Properties:{textures:[{Value:""%{_value}%""}]}}}"
