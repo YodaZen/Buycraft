@@ -15,6 +15,7 @@
 
 on load:
     load yml "plugins/Skript/YAML/Buycraft/Config.yml" as "plugins/Skript/YAML/Buycraft/Config.yml"
+    set yml value "Version" from "plugins/Skript/YAML/Buycraft/Config.yml" to "1.3"
     if yml value "Payment" from "plugins/Skript/YAML/Buycraft/Config.yml" is not set:
         set yml value "Payment.Method" from "plugins/Skript/YAML/Buycraft/Config.yml" to "DIRECT TRANSFER"
         set {_comments::*} to "Mulige Betalingsmetoder:", "UNIKPAY | Her vil der blive sendt en betalingsanmodning via Unikpay til køberen.", "DIRECT TRANSFER | Her vil der blive sendt en besked i chatten, som informere staffs om en spiller gerne vil købe!"
@@ -175,12 +176,13 @@ on load:
         set {_comments::*} to "Mulige Placeholders:", "{PLAYER_NAME} : Navnet på Spilleren", "{PLAYER_COINS} | Antal af spillerens coins!" and "{PLAYER_PURCHASES} | Spillerens køb i buycraft!"
         set comments of yaml node "Messages" from "plugins/Skript/YAML/Buycraft/Config.yml" to {_comments::*}
     save yml "plugins/Skript/YAML/Buycraft/Messages.yml"
+    set {_version} to (yml value "Version" from "plugins/Skript/YAML/Buycraft/Config.yml")
     if (yml value "Payment" from "plugins/Skript/YAML/Buycraft/Config.yml") = "UNIKPAY":
-        enable script file "buycraft/unikpay.sk"
-        unload script file "buycraft/direct.sk"
+        enable script file "Buycraft-%{_version}%/unikpay.sk"
+        unload script file "Buycraft-%{_version}%/direct.sk"
     else:
-        unload script file "buycraft/Payment/unikpay.sk"
-        enable script file "buycraft/Payment/direct.sk"
+        unload script file "Buycraft-%{_version}%/Payment/unikpay.sk"
+        enable script file "Buycraft-%{_version}%/Payment/direct.sk"
     set {buycraft::prefix::success} to (yml value "Messages.prefix.success" from "plugins/Skript/YAML/Buycraft/Messages.yml")
     set {buycraft::prefix::error} to (yml value "Messages.prefix.error" from "plugins/Skript/YAML/Buycraft/Messages.yml")
     set {buycraft::prefix::warning} to (yml value "Messages.prefix.warning" from "plugins/Skript/YAML/Buycraft/Messages.yml")
