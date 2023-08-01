@@ -37,77 +37,113 @@ Konfigurationsfilen, config.yml, kan findes ved følgende sti: _plugins/Skript/Y
 
 Vi håber, at vores Buycraft tilbyder dig en enestående mulighed for at udvide og tilpasse dit serverens købeprocess på bedst mulig vis.
 ```
-# Mulige Placeholders:
-# {PLAYER_NAME} : Navnet på Spilleren
-Buycraft:
-    Ranks:
-        Item: player head
-        Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDMwZjcxMDE1NzZmMDQxNmJjZjQ4Yjc2Y2MwMGY2NzI0MmE5OTU2MGI4Yjg5M2MyMGIyMGRjODVjYTYzYjUyNyJ9fX0=
-        Slot: 12
-        Title: "&b&lRANKS&f&l:"
-        Lore:
-        - ' '
-        - "&7Klik for at åbne!"
-        Rank1:
-            Settings:
-                Priority: 1
-                BuyAmounts: 1
-                ExecuteCommand:
-                - '[CONSOLE]/lp user {PLAYER_NAME} parent add Rank1'
-            Item: player head
-            Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc0ZjkxMGNhN2VkNzNkOGM1ZmRjODQ3NmQxYmVkN2FlNGUxOGY4ZTFkZjZiODAwZDE2YjNiZTNkMzNlYmJmYyJ9fX0=
-            Price: 2500
-            Slot: 12
-            Title: "&b&lRANK &f&l1"
-            Lore:
-            - "&8|&m------------------&8|"
-            - "&b&lRANK1 &f{PLAYER_NAME}"
-            - "&fIndhold:\n&f - &7/Kit Ice (12h cooldown)"
-            - "&f - &7/eat (5m cooldown)"
-            - ' '
-            - "&fPris: &b&n2.500 shards"
-            - ' '
-            - "&8|&m------------------&8|"
-        Rank2:
-            Settings:
-                Priority: 2
-                BuyAmounts: 1
-                ExecuteCommand:
-                - '[CONSOLE]/lp user {PLAYER_NAME} parent add Rank2'
-                - '[CONSOLE]/lp user {PLAYER_NAME} permission set Kit1 true'
-            Item: player head
-            Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM1NWMyZmNlNjIyNjM4YTQ2ZWM3ZTk2YTA5N2FjZWIzYjEyM2MwOTU4Y2MxMzExMjY4YWFkYzU2NTkyNDQzOSJ9fX0=
-            Price: 2500
-            Slot: 13
-            Title: "&b&lRANK &f&l2"
-            Lore:
-            - "&8|&m------------------&8|"
-            - "&b&lRANK2 &f{PLAYER_NAME}"
-            - "&fIndhold:\n&f - &7/Kit Ice (12h cooldown)"
-            - "&f - &7/eat (5m cooldown)"
-            - ' '
-            - "&fPris: &b&n2.500 shards"
-            - ' '
-            - "&8|&m------------------&8|"
-        Rank3:
-            Settings:
-                Priority: 3
-                BuyAmounts: 1
-                ExecuteCommand:
-                - '[CONSOLE]/lp user {PLAYER_NAME} parent add Rank3'
-                - '[CONSOLE]/lp user {PLAYER_NAME} permission set Kit2 true'
-            Item: player head
-            Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGUyMWQyY2E5MjI3ZmRjMjIwYjMyYTk5OTA4NDNhMzRjN2U5NzVlZWM1OTVkMGYxMzdlMjUwYzE0Y2Q5NzI0NiJ9fX0=
-            Price: 2500
-            Slot: 14
-            Title: "&b&lRANK &f&l3"
-            Lore:
-            - "&8|&m------------------&8|"
-            - "&b&lRANK3 &f{PLAYER_NAME}"
-            - "&fIndhold:\n&f - &7/Kit Ice (12h cooldown)"
-            - "&f - &7/eat (5m cooldown)"
-            - ' '
-            - "&fPris: &b&n2.500 shards"
-            - ' '
-            - "&8|&m------------------&8|"
+Menues:
+    Forside:
+        Title: Buycraft
+        Rows: 5
+        Items:
+            '1':
+                Title: ' '
+                Item: light blue glass pane
+                Slots:
+                - 0
+                - 1
+                - 2
+                - 3
+                - 4
+                - 5
+                - 6
+                - 7
+                - 8
+                Settings:
+                    ClickAction:
+                    - '[CLOSE]'
+            '2':
+                Title: ' '
+                Item: white glass pane
+                Settings:
+                    ClickAction:
+                    - '[CLOSE]'
+                Slots:
+                - 36
+                - 37
+                - 38
+                - 39
+                - 40
+                - 41
+                - 42
+                - 43
+                - 44
+            '3':
+                Item: player head
+                Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2UyZWI0NzUxZTNjNTBkNTBmZjE2MzUyNTc2NjYzZDhmZWRmZTNlMDRiMmYwYjhhMmFhODAzYjQxOTM2M2NhMSJ9fX0=
+                Slots:
+                - 24
+                Title: "&b&lTerms of Service&f&l:"
+                Lore:
+                - "&f- &7Klik for at åbne!"
+                Settings:
+                    ClickAction:
+                    - '[PLAYSOUND] ORB_PICKUP'
+                    - '[OPEN] TOS'
+            '4':
+                Item: player head
+                Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ==
+                Slots:
+                - 22
+                Title: "&b&lBuycraft&f&l:"
+                Lore:
+                - "&f- &7Klik for at åbne!"
+                Settings:
+                    ClickAction:
+                    - '[PLAYSOUND] ORB_PICKUP'
+                    - '[OPEN] CATEGORY'
+            '5':
+                Item: player head
+                Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ==
+                Slots:
+                - 20
+                Title: "&b&lInformation&f&l:"
+                Lore:
+                - "&f- &7Du har &b&n{PLAYER_COINS}&7 coins!"
+                - ' '
+                - "&7Brug denne kommando for at købe flere!:"
+                - "&b/buy request <antal>"
+                - ' '
+                - "&7Købshistorik:"
+                - '{PLAYER_PURCHASES}'
+```
+
+
+
+Der er også en Messages.yml, hvor du kan ændre teskten, prefix og andet:
+
+```
+Messages:
+    prefix:
+        success: "&8&l[&a&l!&8&l]&f"
+        error: "&8&l[&c&l!&8&l]&f"
+        warning: "&8&l[&3&l!&8&l]&f"
+    currency:
+        singular: coin
+        plural: coins
+    Buycraft_Info:
+        CommandMessage:
+        - " &8[ &b&lBUYCRAFT &8]"
+        - ''
+        - "&f/buycraft info\n   &f - &7Viser denne besked!"
+        - "&f/buycraft info <player>\n   &f - &7Viser spillerens information!"
+        - "&f/buycraft give <player> <amount>\n   &f - &7Giver Coins til spilleren! &nBliver logged som i købshistorik!"
+        - "&f/buycraft take <player> <amount>\n   &f - &7Fjerner Coins fra spilleren! &nFjerner ikke fra købshistorik!"
+        - "&f/buycraft clear <player>\n   &f - &7Resætter spillerens Coins og købshistorik!"
+        - ''
+        PlayerStats:
+        - " &8[ &b&lBUYCRAFT &8]"
+        - "&fSpiller: {PLAYER_NAME}"
+        - "&fCoins: {PLAYER_COINS}"
+        - 'Købshistorik:'
+        - '{PLAYER_PURCHASES}'
+        - "&f/buycraft take <player> <amount>\n   &f - &7Fjerner Coins fra spilleren! &nFjerner ikke fra købshistorik!"
+        - "&f/buycraft clear <player>\n   &f - &7Resætter spillerens Coins og købshistorik!"
+        - ''
 ```
