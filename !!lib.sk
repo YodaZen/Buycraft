@@ -177,9 +177,9 @@ on load:
         set comments of yaml node "Messages" from "plugins/Skript/YAML/Buycraft/Config.yml" to {_comments::*}
     save yml "plugins/Skript/YAML/Buycraft/Messages.yml"
     set {_version} to (yml value "Version" from "plugins/Skript/YAML/Buycraft/Config.yml")
-    if (yml value "Payment" from "plugins/Skript/YAML/Buycraft/Config.yml") = "UNIKPAY":
-        enable script file "Buycraft-%{_version}%/unikpay.sk"
-        unload script file "Buycraft-%{_version}%/direct.sk"
+    if (yml value "Payment.Method" from "plugins/Skript/YAML/Buycraft/Config.yml") = "UNIKPAY":
+        enable script file "Buycraft-%{_version}%/Payment/unikpay.sk"
+        unload script file "Buycraft-%{_version}%/Payment/direct.sk"
     else:
         unload script file "Buycraft-%{_version}%/Payment/unikpay.sk"
         enable script file "Buycraft-%{_version}%/Payment/direct.sk"
