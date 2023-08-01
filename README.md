@@ -128,7 +128,7 @@ Menues:
                 - '{PLAYER_PURCHASES}'
 ```
 
-Her er et eksempel, som viser alle mulige ting, som man kan ændre på:
+# Eksempel
 ```
 Menues:
     NavnetPåDinMenu:
