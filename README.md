@@ -128,8 +128,31 @@ Menues:
                 - '{PLAYER_PURCHASES}'
 ```
 
-
-
+Her er et eksempel, som viser alle mulige ting, som man kan ændre på:
+```
+Menues:
+    NavnetPåDinMenu:
+        Title: Buycraft # Titlen på din GUI, du kan godt bruge 
+        Rows: 3 # Antallet af rows i din GUI
+        Items:
+            '1':
+                Title: ' '
+                Item: player head # Her kan du sætte typen på itemet.
+                Value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwNjQwMzZiMjMyYmVkNGNkMDBhMWQxZTQ3YzkxZDcxNjk5ZGQ5YzdlZjg2MWExMmYxZWZjMDhiMWFmMzczIn19fQ== # Dette behøves kun, hvis du har sat Itemet som player head.
+                Slots: # Du har mulighed for at sætte flere slots
+                - 13
+                Settings:
+                    Price: 30000 # Sætter prisen for itemet
+                    Priority: 3 # Sætter prioriteten for itemet
+                    BuyAmounts: 1 # Sætter antallet af gange itemet kan købes
+                    ExecuteCommand: # Får den til at execute enten [PLAYER] eller [CONSOLE] kommando, ved køb af produktet.
+                    - '[CONSOLE]/lp user {PLAYER_NAME} parent add Rank3'
+                    ClickAction:
+                    - '[PLAYSOUND] ORB_PICKUP' # Spiller lyden ORB_PICKUP til spilleren ved tryk
+                    - '[OPEN] TOS' # Åbner din oprettet ved menu, ved navn TOS (Du skal bare benytte et navn, på en menu du har oprettet
+                    - '[CLOSE]' # Lukker spillerens menu
+```
+                
 # Messages.yml
 ```
 Messages:
