@@ -13,7 +13,7 @@ For at kunne benytte dette skal du have følgende plugins:
 `Bemærk: Skriptet er kun blevet testet til version 1.8.8`
 
 
-`Bemærk: At din buycraft folder skal hedde "buycraft"`
+`Bemærk: At rename Buycraft-Version folderen, kan give problemer med payment options."`
 
 # Kommandoer:
 
