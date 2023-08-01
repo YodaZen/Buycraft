@@ -130,8 +130,7 @@ Menues:
 
 
 
-Der er også en Messages.yml, hvor du kan ændre teskten, prefix og andet:
-
+# Messages.yml
 ```
 Messages:
     prefix:
