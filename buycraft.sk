@@ -13,110 +13,109 @@
 # ██║░░██║██║░░░░░  ░░░██║░░░╚█████╔╝██████╔╝██║░░██║███████╗███████╗██║░╚███║
 # ╚═╝░░╚═╝╚═╝░░░░░  ░░░╚═╝░░░░╚════╝░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝
 
-
 command /buycraft [<string>] [<offline player>] [<integer>]:
     aliases: /butik, /buy, /store
     cooldown: 1 second
-    cooldown message: &8&l[&3&l!&8&l] &fVent lidt før du prøver igen!
+    cooldown message: %{buycraft::prefix::warning}% &fVent lidt før du prøver igen!
     trigger:
+        set {_currency::2} to (yml value "Messages.currency.plural" from "plugins/Skript/YAML/Buycraft/Messages.yml")
         if arg-1 is not set:
             buycraft(player)
         else if arg-1 = "request":
             set {_num} to "%arg-2%" parsed as number
             if {_num} is set:
-                message "&8&l[&a&l!&8&l] &b%player%&f vil gerne købe &b%{_num}% shards&f!" to all players where [input has permission "OP"]
-                message "&8&l[&a&l!&8&l] &fDu har oprettet en anmodning om &b%{_num}% shards&f!" to player
+                set {_method} to (yml value "Payment.Method" from "plugins/Skript/YAML/Buycraft/Config.yml")
+                if {_method} = "DIRECT TRANSFER":
+                    PaymentRequest({_num},player)
+                else if {_method} = "UNIKPAY":
+                    PaymentRequest({_num},player)
             else:
                 message "&8&l[&a&l!&8&l] &fForkert brug: /buycraft request <antal>!"
         if player has permission "buycraft.manage":
             if arg-1 = "info":
                 if arg-2 is not set:
-                    message " &8[ &b&lBUYCRAFT &8]"
-                    message ""
-                    message "&f/buycraft info%nl%   &f - &7Viser denne besked!"
-                    message "&f/buycraft info <player>%nl%   &f - &7Viser spillerens information!"
-                    message "&f/buycraft give <player> <amount>%nl%   &f - &7Giver shards til spilleren! &nBliver logged som i købshistorik!"
-                    message "&f/buycraft take <player> <amount>%nl%   &f - &7Fjerner shards fra spilleren! &nFjerner ikke fra købshistorik!"
-                    message "&f/buycraft clear <player>%nl%   &f - &7Resætter spillerens shards og købshistorik!"
-                    message ""
+                    loop placeholder_replace((yml list "Messages.Buycraft_Info.CommandMessage" from "plugins/Skript/YAML/Buycraft/Messages.yml"),player):
+                        message formatted loop-value to player
                 else if arg-2 is a player:
-                    message " &8[ &b&lBUYCRAFT &8]"
-                    message "&fSpiller: %arg-2%"
-                    message "&fShards: %{Buycraft::%uuid of arg-2%::Shards} ? 0%"
-                    message "Købshistorik:"
-                    message join (reversed ({Buycraft::%arg-2's uuid%::Purchases::*} ? "&cIngen tidligere køb")) with nl
+                    loop placeholder_replace((yml list "Messages.Buycraft_Info.PlayerStats" from "plugins/Skript/YAML/Buycraft/Messages.yml"),player):
+                        message formatted loop-value to player
             if arg-2 is a player:
                 if arg-1 = "give":
                     if arg-3 is set:
-                        add arg-3 to {Buycraft::%arg-2's uuid%::Shards}
-                        broadcast "&8&l[&a&l!&8&l] &b%arg-2%&f har købt &b%arg-3% shards&f via buycraft!"
+                        add arg-3 to {Buycraft::%arg-2's uuid%::Coins}
+                        message "&8&l[&a&l!&8&l] &b%arg-2%&f har købt &b%arg-3% %{_currency::2}%&f via buycraft!" to all players
+                        add "&f- [%{_currency::2} in strict proper case%] %arg-3% &8(&f%now formatted as "dd-MM-yyyy, HH:mm"%&8)" to {Buycraft::%arg-2's uuid%::Purchases::*}
                 else if arg-1 = "take":
                     if arg-3 is set:
-                        if {Buycraft::%arg-2's uuid%::Shards} >= arg-3:
-                            remove arg-3 from {Buycraft::%arg-2's uuid%::Shards}
-                            message "&8&l[&a&l!&8&l] &fDu har fjernet &b%arg-3% shards&f fra &b%arg-2%&f!" to player
+                        if {Buycraft::%arg-2's uuid%::Coins} >= arg-3:
+                            remove arg-3 from {Buycraft::%arg-2's uuid%::Coins}
+                            message "&8&l[&a&l!&8&l] &fDu har fjernet &b%arg-3% %{_currency::2}%&f fra &b%arg-2%&f!" to player
                         else:
-                            if {Buycraft::%arg-2's uuid%::Shards} > 0:
-                                set {Buycraft::%arg-2's uuid%::Shards} to 0
-                                message "&8&l[&a&l!&8&l] &fDu har sat &b%arg-2%'s shards&f til 0!" to player
+                            if {Buycraft::%arg-2's uuid%::Coins} > 0:
+                                set {Buycraft::%arg-2's uuid%::Coins} to 0
+                                message "&8&l[&a&l!&8&l] &fDu har sat &b%arg-2%'s %{_currency::2}%&f til 0!" to player
                             else:
-                                message "&8&l[&c&l!&8&l] &b%arg-2%&f har allerede kun 0 shards!" to player
+                                message "&8&l[&c&l!&8&l] &b%arg-2%&f har allerede kun 0 %{_currency::2}%!" to player
                 else if arg-1 = "clear":
                     delete {Buycraft::%arg-2's uuid%::*}
                     message "&8&l[&a&l!&8&l] &fDu har cleared &b%arg-2%" to player
 
+
+
 inventory click:
-    if name of player's current inventory contains "&3&lBuycraft -":
-        cancel event
-        name of event-slot = "&c&lGå tilbage!":
-            buycraft(player,"main")
-        if event-slot is a player head:
-            set {_type} to getType(name of event-inventory)
-            loop yml node keys "Buycraft.%{_type}%" from "Config":
-                if index of event-slot = (yml value "%loop-node%.Slot" from "Config"):
-                    set {_name} to last element of split "%loop-node%" at "."
-                    set {_price} to (yml value "%loop-node%.Price" from "Config")
-            set {_buyable} to (yml value "Buycraft.%{_type}%.%{_name}%.Settings.BuyAmounts" from "Config")
-            if {_buyable} is set:
-                set {_amount} to (size of ({Buycraft::%player's uuid%::Purchases::*} where [input contains "[%{_type}%] %{_name}%"]))
-                if {_amount} >= {_buyable}:
-                    message "&8&l[&c&l!&8&l] &fDu kan ikke købe flere af dette produkt!" to player
-                    stop
-            if ((yml value "Buycraft.%{_type}%.%{_name}%.Settings.Priority" from "Config") ? 1) > ({Buycraft::%player's uuid%::%{_type}%} ? 0):
-                if {Buycraft::%player's uuid%::Shards} >= {_price}:
-                    subtract {_price} from {Buycraft::%player's uuid%::Shards}
-                    broadcast "&8&l[&a&l!&8&l] &b%player%&f har lige købt for &b%{_name}%&f for &b%{_price}% shards&f!"
-                    if (yml value "Buycraft.%{_type}%.%{_name}%.Settings.Priority" from "Config") is set:
-                        set {Buycraft::%player's uuid%::%{_type}%} to (yml value "Buycraft.%{_type}%.%{_name}%.Settings.Priority" from "Config")
-                    set {_command::*} to (yml list "Buycraft.%{_type}%.%{_name}%.Settings.ExecuteCommand" from "Config")
-                    loop {_command::*}:
-                        if loop-value contains "[PLAYER]":
-                            player command "%placeholder_replace(loop-value,player)%"
-                        else if loop-value contains "[CONSOLE]":
-                            console command "%placeholder_replace(loop-value,player)%"
-                    add "&f- [%{_type}%] %{_name}% &8(&f%now formatted as "dd-MM-yyyy, HH:mm"%&8)" to {Buycraft::%player's uuid%::Purchases::*}
+    player's current inventory contains (metadata "Buycraft" of player)
+    cancel event
+    set {_type} to (metadata "Buycraft_Type" of player)
+    loop yml node keys "Menues.%{_type}%.Items" from "plugins/Skript/YAML/Buycraft/Config.yml":
+        set {_Slots::*} to (yml list "%loop-node%.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml")
+        if {_Slots::*} contains index of event-slot:
+            set {_actions::*} to (yml list "%loop-node%.Settings.ClickAction" from "plugins/Skript/YAML/Buycraft/Config.yml")
+            loop {_actions::*}:
+                if loop-value-2 contains "[PLAYSOUND]":
+                    set {_sound} to 2nd element of (split loop-value-2 at " ")
+                    play sound {_sound} with volume 0.5 to player
+                if loop-value-2 contains "[OPEN]":
+                    set {_menues::*} to yml node keys "Menues" from "plugins/Skript/YAML/Buycraft/Config.yml"
+                    set {_menu} to 2nd element of (split loop-value-2 at " ")
+                    if {_menues::*} contains {_menu}:
+                        buycraft(player,{_menu})
+                    else:
+                        message "&cKonfig Fejl: Kan ikke åbne menuen, da den ikke findes!" to player
+                if loop-value-2 contains "[PAYMENT]":
+                    set {_name} to (2nd element of (split loop-value-2 at " "))
+                    Buycraft_Payment({_type},{_name},index of event-slot,player)
+                if loop-value-2 contains "[CLOSE]":
                     close player's inventory
+
+
+function Buycraft_Payment(type: string, name: string, slot: integer, player: player):
+    set {_currency::2} to (yml value "Messages.currency.plural" from "plugins/Skript/YAML/Buycraft/Messages.yml")
+    loop yml node keys "Menues.%{_type}%.Items" from "plugins/Skript/YAML/Buycraft/Config.yml":
+        set {_slots::*} to (yml list "%loop-node%.Slots" from "plugins/Skript/YAML/Buycraft/Config.yml")
+        if {_slots::*} contains {_slot}:
+            set {_price} to (yml value "%loop-node%.Settings.Price" from "plugins/Skript/YAML/Buycraft/Config.yml")
+            set {_buyable} to (yml value "%loop-node%.Settings.BuyAmounts" from "plugins/Skript/YAML/Buycraft/Config.yml")
+            if {_buyable} is set:
+                set {_amount} to (size of ({Buycraft::%{_player}'s uuid%::Purchases::*} where [input contains "[%{_type}%] %{_name}%"]))
+                if {_amount} >= {_buyable}:
+                    message "&8&l[&c&l!&8&l] &fDu kan ikke købe flere af dette produkt!" to {_player}
+                    stop
+            if ((yml value "%loop-node%.Settings.Priority" from "plugins/Skript/YAML/Buycraft/Config.yml") ? 1) > ({Buycraft::%{_player}'s uuid%::%{_name}%} ? 0):
+                if {Buycraft::%{_player}'s uuid%::Coins} >= {_price}:
+                    subtract {_price} from {Buycraft::%{_player}'s uuid%::Coins}
+                    message "&8&l[&a&l!&8&l] &b%{_player}%&f har lige købt &b%{_name}%&f for &b%{_price}% %{_currency::2}%&f!" to all players
+                    if (yml value "%loop-node%.Settings.Priority" from "plugins/Skript/YAML/Buycraft/Config.yml") is set:
+                        set {Buycraft::%{_player}'s uuid%::%{_type}%} to (yml value "%loop-node%.Settings.Priority" from "plugins/Skript/YAML/Buycraft/Config.yml")
+                    set {_command::*} to (yml list "%loop-node%.Settings.ExecuteCommand" from "plugins/Skript/YAML/Buycraft/Config.yml")
+                    loop {_command::*}:
+                        if loop-value-2 contains "[PLAYER]":
+                            {_player} command "%placeholder_replace(loop-value-2,{_player})%"
+                        else if loop-value-2 contains "[CONSOLE]":
+                            console command "%placeholder_replace(loop-value-2,{_player})%"
+                    add "&f- [%{_type}%] %{_name}% &8(&f%now formatted as "dd-MM-yyyy, HH:mm"%&8)" to {Buycraft::%{_player}'s uuid%::Purchases::*}
                 else:
-                    message "&8&l[&c&l!&8&l] &fDu har ikke nok shards til at købe dette! Du har &b&n%{Buycraft::%player's uuid%::Shards} ? 0% shards&f!" to player
+                    message "&8&l[&c&l!&8&l] &fDu har ikke nok %{_currency::2}% til at købe dette! Du har &b&n%{Buycraft::%{_player}'s uuid%::Coins} ? 0% %{_currency::2}%&f!" to {_player}
+            else if ((yml value "%loop-node%.Settings.Priority" from "plugins/Skript/YAML/Buycraft/Config.yml") ? 1) = ({Buycraft::%{_player}'s uuid%::%{_name}%} ? 0):
+                message "&8&l[&c&l!&8&l] &fDu ejer allerede dette produkt&f!" to {_player}
             else:
-                message "&8&l[&c&l!&8&l] &fDu kan ikke dette da du allerede ejer et bedre produkt&f!" to player
-    if name of player's current inventory contains "&3&lBuycraft":
-        cancel event
-        if event-slot is a player head:
-            play sound "ORB_PICKUP" with volume 0.15 to player
-    if name of player's current inventory = "&f&l        ❃ &3&lBuycraft &f&l❃":
-        loop yml node keys "Buycraft" from "Config":
-            if index of event-slot = (yml value "%loop-node%.Slot" from "Config"):
-                set {_split::*} to split "%loop-node%" at "."
-                set {_size} to (size of {_split::*})
-                buycraft(player,"%{_split::%{_size}%}%")
-    else if name of player's current inventory = "&f&l        ❁ &3&lBuycraft &f&l❁":
-        if index of event-slot = 15:
-            if click action = left mouse:
-                buycraft(player,"main")
-            else if click action = right mouse:
-                buycraft(player,"TOS")
-    else if name of player's current inventory = "&f    &l❁ &3&lTerms of Service &f&l❁":
-        cancel event
-        if index of event-slot = 31:
-            buycraft(player,"start")
+                message "&8&l[&c&l!&8&l] &fDu kan ikke dette da du allerede ejer et bedre produkt&f!" to {_player}
