@@ -1,4 +1,0 @@
-
-function PaymentRequest(num: number, player: player):
-    message "&8&l[&a&l!&8&l] &b%{_player}%&f vil gerne købe &b%{_num}% Coins&f!" to all players where [input has permission "OP"]
-    message "&8&l[&a&l!&8&l] &fDu har oprettet en anmodning om &b%{_num}% Coins&f!" to {_player}
